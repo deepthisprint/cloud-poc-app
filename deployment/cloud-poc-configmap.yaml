@@ -16,4 +16,4 @@ data:
     spring.data.mongodb.password=admin
     spring.data.mongodb.port=27017
     mule.host=169.55.4.141
-    mule.port=31451
+    mule.port=30332
