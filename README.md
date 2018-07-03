@@ -1,4 +1,4 @@
-# cloud-poc
+# Sprint cloud-poc
 
 The IBM ICP CoC team modifications of the code origination here: [https://github.com/deepthisprint/cloud-poc](https://github.com/deepthisprint/cloud-poc).
 
