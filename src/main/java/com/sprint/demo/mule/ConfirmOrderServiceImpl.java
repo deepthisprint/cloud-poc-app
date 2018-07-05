@@ -42,24 +42,27 @@ public class ConfirmOrderServiceImpl {
 			HashMap<String, String> urlParams = new HashMap<String, String>();
 			String muleUrl = "http://" + MULE_HOST + ':' + MULE_PORT + "/api/digital/confirm/order";
 			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(muleUrl);
-				restTemplate = new RestTemplate(
-						new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-				ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<ClientHttpRequestInterceptor>();
-				restTemplate.setInterceptors(interceptors);
-				MultiValueMap<String, OrderDetails> map= new LinkedMultiValueMap<String, OrderDetails>();
-				map.add("reqestBody", reqBody);
-				HttpEntity<MultiValueMap<String, OrderDetails>> request = new HttpEntity<MultiValueMap<String, OrderDetails>>(map, httpHeaders);
+			restTemplate = new RestTemplate(
+					new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+			ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<ClientHttpRequestInterceptor>();
+			restTemplate.setInterceptors(interceptors);
+			MultiValueMap<String, OrderDetails> map= new LinkedMultiValueMap<String, OrderDetails>();
+			map.add("reqestBody", reqBody);
+			HttpEntity<MultiValueMap<String, OrderDetails>> request = new HttpEntity<MultiValueMap<String, OrderDetails>>(map, httpHeaders);
 			HttpEntity  httpEntity = new HttpEntity (reqBody,httpHeaders);
 			
 			ConfirmOrderLVOResponse response = new ConfirmOrderLVOResponse();
+			LinkedHashMap res = null;
 			try {
-				LinkedHashMap res = restTemplate.postForObject(builder.buildAndExpand(urlParams).toUri(), request, LinkedHashMap.class);
+				res = restTemplate.postForObject(builder.buildAndExpand(urlParams).toUri(), request, LinkedHashMap.class);
 				response.setStatus(200);
 			} catch( RestClientException restEx ) {
-				System.out.println( restEx.getMessage() );
-//				response.setCategory(res.get("category").toString());
-//				response.setErrorCode(res.get("errorCode").toString());
-				response.setStatus(500);
+				if( res != null ) {
+					System.out.println( restEx.getMessage() );
+					response.setCategory(reqBody.getNameOnCard());
+					response.setErrorCode(restEx.getLocalizedMessage());
+					response.setStatus(400);
+				}
 			}
 //			LinkedHashMap res = restTemplate.postForObject(builder.buildAndExpand(urlParams).toUri(),
 //					request, LinkedHashMap.class);
