@@ -33,7 +33,7 @@ public class WebSocketEventListener {
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
 
-            simpMessageSendingOperations.convertAndSend("/topic/hello", chatMessage);
+//            simpMessageSendingOperations.convertAndSend("/topic/hello", chatMessage);
         }
     }
 }
