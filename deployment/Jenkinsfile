@@ -19,7 +19,7 @@ podTemplate(label: label,
 	  def tag = "1.0.0"
 	  def gitSrc = "https://github.com/deepthisprint/cloud-poc-app.git"
 	  def dockerRegistry = "https://mycluster.icp:8500"
-	  def image = "mycluster.icp:8500/sprint-poc/cloud-poc"
+	  def image = "mycluster.icp:8500/deepthi/cloud-poc"
 	  def deployment = "deployment/cloud-poc-deployment.yaml"
 	  def config = "deployment/cloud-poc-configmap.yaml"
 	  def service ="deployment/cloud-poc-service.yaml"
