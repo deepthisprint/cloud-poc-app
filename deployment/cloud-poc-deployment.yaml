@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: cloud-poc
-        image: mycluster.icp:8500/sprint-poc/cloud-poc
+        image: mycluster.icp:8500/deepthi/cloud-poc
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
